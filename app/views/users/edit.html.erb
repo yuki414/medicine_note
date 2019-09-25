@@ -1,0 +1,47 @@
+<% provide(:title, "Edit user") %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+
+      <%= f.label :sex, "性別" %>
+      <%= f.text_field :sex, class: 'form-control' %>
+
+      <%= f.label :birthdate, "誕生日" %>
+      <%= f.email_field :birthdate, class: 'form-control' %>
+
+      <%= f.label :height, "身長" %>
+      <%= f.password_field :height, class: 'form-control' %>
+
+      <%= f.label :weight, "体重" %>
+      <%= f.password_field :weight, class: 'form-control' %>
+
+      <%= f.label :blood, "血液型" %>
+      <%= f.password_field :blood, class: 'form-control' %>
+
+      <%= f.label :countact, "連絡先" %>
+      <%= f.password_field :countact, class: 'form-control' %>
+
+      <%= f.label :address, "住所" %>
+      <%= f.password_field :address, class: 'form-control' %>
+
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "パスワード（確認用）" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "プロフィール変更をする", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
