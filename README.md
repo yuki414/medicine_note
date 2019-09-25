@@ -1,24 +1,259 @@
-# README
+# お薬手帳Web
+## 要件を決める
+- ユースケース図
+  - どういうユーザがいて、それぞれがどういう使い方をするか
+  - http://plantuml.com/ja/use-case-diagram
+## 設計
+- データモデル設計
+- 画面設計
+## 実装
+## リリース
+- heroku
+## 披露
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### ユースケース記述
+- 患者
+  - ログインする
+  - お薬手帳を見る
+  - お薬手帳を薬剤師にみせる（提出する）
+  - 市販薬やサプリメントを記入する
+  - プロフィールを登録、編集する
+  - アレルギーの有無を登録、編集する
+  - 健康診断、血液検査の結果などを登録、編集する
+  - 既往症を登録、編集する
+  - 疑問・質問などを記入・編集する
 
-Things you may want to cover:
+- 薬剤師/医者
+  - 患者のお薬手帳を参照する
+  - 処方した薬をお薬と注意事項を手帳に追加する
+  - 副作用歴を登録、編集する
+  - 健康診断、血液検査の結果などを登録、編集する
+  - 医院・薬局の登録、編集をする
 
-* Ruby version
 
-* System dependencies
+### ユースケース図(UML)
 
-* Configuration
+上のユースケースをもとにユースケース図を作成
+```uml
+@startuml
+left to right direction
+' システム境界にpackageを四角で記述
+skinparam packageStyle rectangle
 
-* Database creation
+actor 患者 as PA
+actor 薬剤師 as PH
 
-* Database initialization
+rectangle お薬手帳の利用 {
+  usecase (ログインする) as login
+  usecase (お薬手帳をみる) as look
+  usecase (薬を記入する) as add_me
+  usecase (プロフィール登録をする) as add_pr
+  usecase (アレルギーの登録をする) as add_al
+  usecase (既往症の登録をする) as add_mh
+  usecase (副作用の登録をする) as add_se
+  usecase (医院・薬局の登録をする) as add_ho
+  usecase (お薬手帳をみる) as look
+  usecase (健康診断、血液検査の結果を登録する) as checkup
+}
+PA -- login
+PA -- look
+PA -- add_me
+PA -- add_pr
 
-* How to run the test suite
+PH -- look
+PH -- add_me
+PH -- add_se
+PH -- add_ho
 
-* Services (job queues, cache servers, search engines, etc.)
+add_pr ..> add_al:<<include>>
+add_pr ..> add_mh:<<include>>
+add_pr ..> checkup:<<include>>
 
-* Deployment instructions
+@enduml
+```
 
-* ...
+### データモデル
+<details>
+<summary>薬歴</summary>
+
+- 薬歴ID
+- 処方日
+- 患者ID
+- 薬剤師ID
+- 薬ID
+- 用量
+- 要法（食前・食後など）
+</details>
+
+<details>
+<summary>患者</summary>
+
+- 患者ID
+- 名前
+- 性別
+- 生年月日
+- 身長
+- 体重
+- 血液型
+- 住所
+- 連絡先
+</details>
+
+<details>
+<summary>薬剤師</summary>
+
+- 薬剤師ID
+- 名前
+- 医療機関ID 
+</details>
+
+<details>
+<summary>医療機関</summary>
+
+- 医療機関ID
+- 機関名
+- 住所
+- 電話番号
+</details>
+
+<details>
+<summary>薬</summary>
+
+- 薬ID
+- 名前
+- 効果
+</details>
+<details>
+<summary>アレルギー情報</summary>
+
+- アレルギーID
+- アレルギー名
+- 患者ID
+- 食べ物or薬
+    - 薬ID
+    - 食べ物
+</details>
+<details>
+<summary>副作用歴</summary>
+
+- 副作用ID
+- 日付
+- 患者ID
+- 薬ID
+- 症状
+</details>
+
+<details>
+<summary>既往歴</summary>
+
+- 既往歴ID
+- 日付
+- 患者ID
+- 疾患
+</details>
+
+### ER図
+データモデルを参考にER図を作成していく
+```uml
+' 図の中で目立たせたいエンティティに着色するための色の名前（定数）を定義します。
+!define MAIN_ENTITY #E2EFDA-C6E0B4
+!define MAIN_ENTITY_2 #FCE4D6-F8CBAD
+
+' 他の色も、用途が分りやすいように名前をつけます。
+!define METAL #F2F2F2-D9D9D9
+!define MASTER_MARK_COLOR AAFFAA
+!define TRANSACTION_MARK_COLOR FFAA00
+
+/'
+  デフォルトのスタイルを設定します。
+  この場合の指定は class です。entity ではエラーになります。
+'/
+skinparam class {
+    BackgroundColor METAL
+    BorderColor Black
+    ArrowColor Black
+}
+
+package "お薬手帳システム" as medi_sys {
+    entity "患者テーブル" as patient <<E, TRANSACTION_MARK_COLOR>> MAIN_ENTITY {
+        +患者ID
+        --
+        名前
+        性別
+        生年月日
+        身長
+        体重
+        血液型
+        住所
+        連絡先
+    }
+
+    entity "薬歴テーブル" as medicine_history <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+        + 薬歴ID
+        --
+        # 患者ID
+        # 薬剤師ID
+        # 薬ID
+        処方日
+        用量
+        要法（食前・食後など）
+    }
+    
+    entity "薬テーブル" as medicine <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+        + 薬ID
+        --
+        名前
+        効果
+    }
+    
+    entity "薬剤師テーブル" as pharmacist <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+        + 薬剤師ID
+        --
+        名前
+        # 医療機関ID 
+    }
+    
+    entity "医療機関テーブル" as hospital <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+    + 医療機関ID
+    --
+    機関名
+    住所
+    電話番号
+    }
+
+    entity "アレルギーテーブル" as allergies <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+    + アレルギーID
+    --
+    アレルギー名
+    # 患者ID
+    # 食べ物or薬(薬ならば薬ID)
+    }
+    
+    entity "副作用歴テーブル" as side_effect <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+    + 副作用ID
+    --
+    日付
+    # 患者ID
+    # 薬ID
+    症状
+    }
+    
+    entity "既往歴テーブル" as sick_history <<E,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+    + 既往歴ID
+    --
+    日付
+    # 患者ID
+    疾患名
+    }
+}
+
+medicine_history }o---- patient 
+medicine_history }o---- pharmacist
+medicine_history }o---- medicine
+pharmacist }o---- hospital
+allergies }o--ri-- patient
+allergies }o---- medicine
+side_effect }o---- patient
+side_effect }o----medicine
+patient --ri--o{ sick_history
+```
