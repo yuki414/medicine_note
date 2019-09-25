@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'main_pages#home'
+  
+  get '/about',   to: 'main_pages#about'
+  get '/help',    to: 'main_pages#help'
+  get '/contact', to: 'main_pages#contact'
 end
