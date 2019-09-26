@@ -8,10 +8,19 @@ Rails.application.routes.draw do
   get   '/signup',  to: 'users#new'
   post  '/signup',  to: 'users#create'
   get   '/edit',    to: 'users#edit'
-  get 'users/new'
+  resources :users
   
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users
+  
+  get '/medicines',   to: 'medicines#index' # 全ての薬表示
+  get '/medicines',  to: 'medicines#show' #特定の薬表示
+  resources :medicines
+  
+  get '/mhis', to: 'medicine_histories#index'
+  get '/mhis', to: 'medicine_histories#show'
+  get '/mhis/new', to: 'medicine_histories#new'
+  get '/mhis', to: 'medicine_histories#create'
+  resources :medicine_histories
 end

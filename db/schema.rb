@@ -10,7 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190925033143) do
+ActiveRecord::Schema.define(version: 20190926012741) do
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "medicine_histories", force: :cascade do |t|
+    t.string "date"
+    t.integer "user_id"
+    t.integer "pharmacist_id"
+    t.integer "medicine_id"
+    t.string "dose"
+    t.string "adm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medicine_id"], name: "index_medicine_histories_on_medicine_id"
+    t.index ["pharmacist_id"], name: "index_medicine_histories_on_pharmacist_id"
+    t.index ["user_id"], name: "index_medicine_histories_on_user_id"
+  end
+
+  create_table "medicines", force: :cascade do |t|
+    t.string "name"
+    t.string "effect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pharmacists", force: :cascade do |t|
+    t.string "name"
+    t.integer "institution_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["institution_id"], name: "index_pharmacists_on_institution_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "sex"
+    t.integer "birthday"
+    t.float "height"
+    t.float "weight"
+    t.string "blood"
+    t.string "address"
+    t.string "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

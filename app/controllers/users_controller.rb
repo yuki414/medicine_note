@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    # ヒットしたところ”全て”の場合whereメソッド
+    @mhs = MedicineHistory.where(user_id: params[:id])
+    @pharmacist = Pharmacist.all
+    @medicine = Medicine.all
   end
 
   def new

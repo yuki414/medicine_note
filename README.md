@@ -74,54 +74,62 @@ add_pr ..> checkup:<<include>>
 
 ### データモデル
 <details>
-<summary>薬歴</summary>
+<summary>薬歴(MedicineHistory)</summary>
 
 - 薬歴ID
-- 処方日
+- 処方日(date):string
+- 患者ID(user_id):references
+- 薬剤師ID(pharmacist_id):references
+- 薬ID(medicine_id):references
+- 用量(dose):string
+- 要法（食前・食後など）(adm):string
+</details>
+
+<details>
+<summary>患者(user)</summary>
+
 - 患者ID
-- 薬剤師ID
-- 薬ID
-- 用量
-- 要法（食前・食後など）
+- 名前(name):string
+- メール(email):string
+- PW(password):string
 </details>
 
 <details>
-<summary>患者</summary>
+<summary>追加情報(profile)</summary>
 
-- 患者ID
-- 名前
-- 性別
-- 生年月日
-- 身長
-- 体重
-- 血液型
-- 住所
-- 連絡先
+- 患者ID (user_id):references
+- 性別(sex):integer
+- 生年月日(birthday):integer
+- 身長(height):float
+- 体重(weight):float
+- 血液型(blood):string
+- 住所(address):string
+- 連絡先(contact):string
 </details>
 
 <details>
-<summary>薬剤師</summary>
+<summary>薬剤師(pharmacist)</summary>
 
 - 薬剤師ID
-- 名前
-- 医療機関ID 
+- 名前(name):string
+- 医療機関ID(institution_id):references
 </details>
 
 <details>
-<summary>医療機関</summary>
+<summary>医療機関(institution)</summary>
 
 - 医療機関ID
-- 機関名
-- 住所
-- 電話番号
+- 機関名(name):string
+- 住所(address):string
+- 電話番号(contact):string
 </details>
 
 <details>
-<summary>薬</summary>
+<summary>薬(medicine)</summary>
 
 - 薬ID
-- 名前
-- 効果
+- 名前(name):string
+- 効果(effect):string
 </details>
 <details>
 <summary>アレルギー情報</summary>
@@ -133,6 +141,7 @@ add_pr ..> checkup:<<include>>
     - 薬ID
     - 食べ物
 </details>
+
 <details>
 <summary>副作用歴</summary>
 
