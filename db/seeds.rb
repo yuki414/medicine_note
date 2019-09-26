@@ -34,7 +34,7 @@ for i in 0..3 do
 end
 
 # medicine_history seeds
-me_date = %w(20190427 20150309 20171110)
+me_date = %w(2019-04-27 2015-03-09 2017-11-10)
 me_uid = [1, 2, 3]
 me_pid = [2, 1, 4]
 me_mid = [4, 1, 2]

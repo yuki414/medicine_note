@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   get '/medicines',  to: 'medicines#show' #特定の薬表示
   resources :medicines
   
-  get '/mhis', to: 'medicine_histories#index'
-  get '/mhis', to: 'medicine_histories#show'
-  get '/mhis/new', to: 'medicine_histories#new'
-  get '/mhis', to: 'medicine_histories#create'
+  get '/mhis',      to: 'medicine_histories#index'
+  get '/mhis',      to: 'medicine_histories#show'
+  get '/mhis/new',  to: 'medicine_histories#new'
+  get '/mhis',      to: 'medicine_histories#create'
   resources :medicine_histories
 end
