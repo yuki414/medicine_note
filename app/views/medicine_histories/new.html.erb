@@ -1,0 +1,31 @@
+<% provide(:title, 'Sign up') %>
+<h1>薬歴追加画面</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@medicine_histories) do |f| %>
+      
+      <%= f.label :date, "日付" %>
+      <%= f.date_field :date %>
+
+      <%= f.label :user_id, "user id" %>
+      <%= f.collection_select :user_id, User.all, :id, :name %>
+
+
+      <%= f.label :pharmacist_id, "pha id" %>
+      <%= f.collection_select :pharmacist_id, Pharmacist.all, :id, :name %>
+
+      <%= f.label :medicine_id, "med id" %>
+      <%= f.collection_select :medicine_id, Medicine.all, :id, :name %>
+
+
+      <%= f.label :adm, "用法" %>
+      <%= f.text_field :adm %>
+
+      <%= f.label :dose, "用量" %>
+      <%= f.text_field :dose %>
+
+      <%= f.submit "薬歴追加決定", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
