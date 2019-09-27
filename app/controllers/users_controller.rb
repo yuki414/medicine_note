@@ -1,13 +1,8 @@
 class UsersController < ApplicationController
   
-  before_action :require_login
-  
   def show
-    @user = User.find(params[:id])
-    # ヒットしたところ”全て”の場合whereメソッド
-    @mhs = MedicineHistory.where(user_id: params[:id])
-    @pharmacist = Pharmacist.all
-    @medicine = Medicine.all
+    @mhis = current_user.medicine_histories
+    @user = current_user
   end
 
   def new

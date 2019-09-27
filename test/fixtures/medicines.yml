@@ -2,8 +2,12 @@
 
 one:
   name: MyString
+  kind: 1
   effect: MyString
+  description: MyText
 
 two:
   name: MyString
+  kind: 1
   effect: MyString
+  description: MyText

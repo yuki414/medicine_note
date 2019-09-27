@@ -14,13 +14,15 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   
-  get '/medicines',   to: 'medicines#index' # 全ての薬表示
-  get '/medicines',  to: 'medicines#show' #特定の薬表示
+  get '/medic',   to: 'medicines#index' # 全ての薬表示
+  get '/medic',  to: 'medicines#show' #特定の薬表示
   resources :medicines
   
-  get '/mhis',      to: 'medicine_histories#index'
-  get '/mhis',      to: 'medicine_histories#show'
-  get '/mhis/new',  to: 'medicine_histories#new'
-  get '/mhis',      to: 'medicine_histories#create'
+  get   '/mhis',      to: 'medicine_histories#index'
+  get   '/mhis',      to: 'medicine_histories#show'
+  get   '/mhis/new',  to: 'medicine_histories#new'
+  post  '/mhis',  to: 'medicine_histories#create'
   resources :medicine_histories
+  
+  
 end

@@ -9,13 +9,17 @@
   </aside>
 </div>
 <h2>薬歴一覧</h2>
-<% @mhs.each do |mh| %>
+<% @mhis.each do |mh| %>
   <div class="row">
     <div class="col-md-8 col-md-offset-3">
       処方日：<%= mh.date %>,
-      担当薬剤師：<%= @pharmacist[mh.pharmacist_id-1].name %>,
-      処方薬：<%= @medicine[mh.medicine_id-1].name %>,
+      担当薬剤師：<%= Pharmacist.find(mh.pharmacist_id).name %>,
+      処方薬：<%= Medicine.find(mh.medicine_id).name %>,
       用法用量：<%= mh.dose %> <%= mh.adm %>
     </div>
   </div>
 <% end %>
+
+<h2>
+  <%= link_to "お薬追加", medic_path %>
+</h2>

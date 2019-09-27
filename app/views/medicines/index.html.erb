@@ -1,10 +1,17 @@
-<% provide(:title, @medicines.length) %>
-<% @medicines.each do |med| %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-          <%= med.name %>,<%= med.effect %>
-      </section>
-    </aside>
-  </div>
+<% provide(:title, 'お薬いちらん') %>
+<h1>お薬一覧</h1>
+
+<!--  検索拡張機能  -->
+<p>お薬検索</p>
+<%= form_tag(medic_path,:method => 'get') do %>
+  <%= text_field_tag :search, params[:search]  %>
+  <%= submit_tag 'Search', :name => nil %>
 <% end %>
+
+<ul><% @medicines.each do |med| %>
+  <li>
+    <%= link_to med.name, mhis_new_path(:mid => med.id) %>
+    <%= med.effect %>
+  </li>
+  <% end %>
+</ul>
