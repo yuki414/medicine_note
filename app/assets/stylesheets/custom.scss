@@ -40,6 +40,7 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  
 }
 
 h2 {
@@ -51,11 +52,28 @@ h2 {
   color: #777;
 }
 
+h3 {
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: normal;
+}
+h4 {
+  font-size: 1.1em;
+  text-align: left;
+  font-weight: normal;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
 
+#edi {
+  width: auto;
+  height: 40px;
+  position: relative;
+  right: -70%;
+}
 /* header */
 
 #logo {
@@ -72,6 +90,102 @@ p {
 #logo:hover {
   color: #fff;
   text-decoration: none;
+}
+
+#center_Box{
+  width:200px;
+  height:auto;
+  margin:auto;
+}
+
+/* table */ 
+
+p {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 60px auto 40px;
+}
+table {
+  margin: 20px auto;
+}
+.tbl-r02 th {
+  background: #808080;
+  border: solid 1px #ccc;
+  color: #fff;
+  padding: 10px;
+}
+.tbl-r02 td {
+  background: #fff;
+  border: solid 1px #ccc;
+  padding: 14px;
+  width: 600px;
+}
+th {
+  background: #808080;
+  border: solid 1px #ccc;
+  color: #fff;
+  padding: 10px;
+}
+td {
+  background: #fff;
+  border: solid 1px #ccc;
+  padding: 14px;
+  width: 300px;
+}
+ 
+@media screen and (max-width: 640px) {
+  .last td:last-child {
+    border-bottom: solid 1px #ccc;
+    width: 100%;
+  }
+  .tbl-r02 {
+    width: 80px;
+  }
+  .tbl-r02 th,
+  .tbl-r02 td {
+　　border-bottom: 1px #ccc;
+    display: block;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .tbl-r03 {
+    width: 90%;
+  }
+  .tbl-r03 tr {
+    display: block;
+    float: left;
+  }
+  .tbl-r03 tr td, 
+  .tbl-r03 tr th {
+    border-left: none;
+    display: block;
+    height: 50px;
+  }
+  .tbl-r03 thead {
+    display: block;
+    float: left;
+    width: 30%;
+  }
+  .tbl-r03 thead tr {
+    width: 100%;
+  }
+  .tbl-r03 tbody {
+    display: block;
+    float: left;
+    width: 70%;
+  }
+  .tbl-r03 tbody tr {
+    width: 50%;
+  }
+  .tbl-r03 tr td + td {
+    border-left: none;
+  }
+  .tbl-r03 tbody td:last-child {
+    border-bottom: solid 1px #ccc;
+  }
 }
 
 /* sidebar */
@@ -155,3 +269,4 @@ input {
   margin-top: 45px;
   @include box_sizing;
 }
+

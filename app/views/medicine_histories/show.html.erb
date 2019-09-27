@@ -1,0 +1,37 @@
+<div id="center_Box">
+  <%= render 'shared/medicineh_image' %>
+</div>
+
+<table class="tbl-r02">
+  <tr>
+    <th>処方日</th>
+    <td><%= @mhis.date %></td>
+  </tr>
+  <tr>
+    <th>お薬名</th>
+    <td><%= Medicine.find(@mhis.medicine_id).name %></td>
+  </tr>
+  <tr>
+    <th>用法用量</th>
+    <td><%= @mhis.adm %>を一日<%= @mhis.dose %></td>
+  </tr>
+  <tr>
+    <th>お薬の説明</th>
+    <td><%= Medicine.find(@mhis.medicine_id).description %></td>
+  </tr>
+  <tr>
+    <th>医療機関</th>
+    <td><%= Institution.find(Pharmacist.find(@mhis.pharmacist_id).institution_id).name %></td>
+  </tr>
+  <tr class="last">
+    <th>担当薬剤師</th>
+    <td><%= Pharmacist.find(@mhis.pharmacist_id).name %></td>
+  </tr>
+</table>
+<div id="edi">
+<%= link_to "お薬情報を修正する", 
+      edit_medicine_history_path(:mh_id => @mhis.id) %>
+<br>
+<%= link_to "お薬情報を削除する", 
+      medicine_history_path(@mhis.id), method: :delete %>
+</div>

@@ -1,10 +1,10 @@
 <% @medicine_histories.each do |mh| %>
   <div class="row">
-        薬歴テーブルID <%= mh.id %>.
-        日付:<%= mh.date %>, 
-        名前:<%= @user[mh.user_id-1].name %>, 
-        担当薬剤師:<%= @pharmacist[mh.pharmacist_id-1].name %>, 
-        薬名:<%= @medicines[mh.medicine_id-1].name %>, 
-        用法:<%= mh.adm %>, 用量:<%= mh.dose %>
+    薬歴テーブルID <%= mh.id %>.
+    日付:<%= mh.date %>, 
+    名前:<%= @user[mh.user_id-1].name %>, 
+    担当薬剤師:<%= @pharmacist[mh.pharmacist_id-1].name %>, 
+    薬名:<%= @medicines[mh.medicine_id-1].name %>, 
+    用法:<%= mh.adm %>, 用量:<%= mh.dose %>
   </div>
 <% end %>

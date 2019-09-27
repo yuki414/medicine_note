@@ -1,0 +1,14 @@
+<% if Medicine.find(@mhis.medicine_id).kind==0 %>
+  <%= image_tag 'medicine_jozai_set.png', :size =>'200'%>
+<% elsif Medicine.find(@mhis.medicine_id).kind==1 %>
+  <%= image_tag 'medicine_genetsuzai.png', :size =>'200' %>
+<% elsif Medicine.find(@mhis.medicine_id).kind==2 %>
+  <%= image_tag 'medicine_konagusuri.png', :size =>'200' %>
+<% elsif Medicine.find(@mhis.medicine_id).kind==3 %>
+  <%= image_tag 'medicine_ichouyaku.png', :size =>'200' %>
+<% elsif Medicine.find(@mhis.medicine_id).kind==4 %>
+  <%= image_tag 'medicine_nurigusuri.png', :size =>'200' %>
+  
+<% elsif Medicine.find(@mhis.medicine_id).kind==9 %>
+  <%= image_tag 'medicine_fukuro.png', :size =>'200' %>
+<% end %>

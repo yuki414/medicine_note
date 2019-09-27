@@ -19,9 +19,6 @@ Rails.application.routes.draw do
   resources :medicines
   
   get   '/mhis',      to: 'medicine_histories#index'
-  get   '/mhis',      to: 'medicine_histories#show'
-  get   '/mhis/new',  to: 'medicine_histories#new'
-  post  '/mhis',  to: 'medicine_histories#create'
   resources :medicine_histories
   
   
