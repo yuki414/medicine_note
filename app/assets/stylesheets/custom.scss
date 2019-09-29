@@ -270,3 +270,19 @@ input {
   @include box_sizing;
 }
 
+/* navbar 全体の背景色とボーダーカラー */
+.navbar-user {
+background-color: #19448e;
+border-color: #091933;
+color:#000000;
+}
+
+.navbar-pharm {
+background-color: #262626;
+border-color: #4d4d4d;
+}
+
+/* navbar テキストカラー */
+.navbar-user .navbar-nav > li > a {
+color: #ffffff;
+}

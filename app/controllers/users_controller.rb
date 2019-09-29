@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
   
+  before_action :require_login, only: [:show, :edit, :update]
+  before_action :correct_user,  only: [:show, :edit, :update]
+  
   def show
-    @mhis = current_user.medicine_histories
+    @mhis = current_user.medicine_histories.order(:date).limit(2).reverse
     @user = current_user
   end
 

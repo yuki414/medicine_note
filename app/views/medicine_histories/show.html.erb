@@ -33,5 +33,6 @@
       edit_medicine_history_path(:mh_id => @mhis.id) %>
 <br>
 <%= link_to "お薬情報を削除する", 
-      medicine_history_path(@mhis.id), method: :delete %>
+      medicine_history_path(@mhis.id), method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
 </div>

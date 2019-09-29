@@ -1,4 +1,7 @@
 class MedicinesController < ApplicationController
+  
+  before_action :require_login,  only: [:new,  :edit, :update]
+  
   def index
     @medicines = Medicine.search(params[:search])
     # @medicines = Medicine.paginate(page: params[:page], per_page: 5).search(params[:search])
@@ -11,6 +14,11 @@ class MedicinesController < ApplicationController
   def new
   end
   
+  def edit
+  end
+  
+  def update
+  end
   
   def search
     #Viewのformで取得したパラメータをモデルに渡す

@@ -48,6 +48,6 @@ class MedicineHistoriesController < ApplicationController
   private
   def mhis_params
     params.require(:medicine_history).permit(:date,
-    :user_id, :pharmacist_id, :medicine_id, :adm, :dose)
+    :pharmacist_id, :medicine_id, :adm, :dose)
   end
 end
