@@ -1,0 +1,2 @@
+module MedicineHistoryPharmacistsHelper
+end

@@ -1,18 +1,20 @@
-<% provide(:title, 'お薬いちらん') %>
-<h1>お薬一覧</h1>
-
-<!--  検索拡張機能  -->
-<h3>お薬検索</h3>
-<%= form_tag(medic_path,:method => 'get') do %>
-  <%= text_field_tag :search, params[:search]  %>
-  <%= submit_tag 'Search', :name => nil %>
-<% end %>
-
-<ul><% @medicines.each do |med| %>
-  <li>
-    <%= link_to med.name, new_medicine_history_path(:m_id => med.id) %>
-    <%= med.effect %>
-  </li>
-  <% end %>
-</ul>
-
+<% provide(:title, 'お薬検索画面') %>
+<aside class="col-md-8 col-md-offset-2">
+  <h1>お薬一覧</h1>
+    <!--  検索拡張機能  -->
+    <h3>お薬検索</h3>
+    <%= form_tag(medic_path,:method => 'get') do %>
+      <%= text_field_tag :search, params[:search]  %>
+      <%= submit_tag 'Search', :name => nil %>
+    <% end %>
+    <div>
+    <ul><% @medicines.each do |med| %>
+      <li>
+        <%= link_to med.name, new_medicine_history_path(:m_id => med.id) %>
+        <%= med.effect %>
+      </li>
+      <% end %>
+    <%= paginate @medicines %>
+    </ul>
+  </div>
+</aside>

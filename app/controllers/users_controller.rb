@@ -2,10 +2,17 @@ class UsersController < ApplicationController
   
   before_action :require_login, only: [:show, :edit, :update]
   before_action :correct_user,  only: [:show, :edit, :update]
+  # before_action :require_uop, only: [:index]
   
+  def index
+    @users = User.search(params[:search])
+  end
   def show
-    @mhis = current_user.medicine_histories.order(:date).limit(2).reverse
+    # @mhis = current_user.medicine_histories.order(:date).limit(2).reverse
+    @mhis = current_user.medicine_histories.order(date: "DESC")
+            .page(params[:page]).per(PER)
     @user = current_user
+    @sefe = current_user.side_effects.page(params[:page]).per(PER)
   end
 
   def new

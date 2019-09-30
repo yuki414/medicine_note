@@ -1,9 +1,8 @@
-<% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-8 col-md-offset-2">
     <section class="user_info">
       <h1>
-        <%= @user.name %> さま
+        <%= @user.name %> さまの薬歴・副作用歴一覧
       </h1>
     </section>
   </aside>
@@ -22,7 +21,8 @@
       <tbody>
       <% @mhis.each do |mhis| %>
         <tr>
-          <td> <%= link_to mhis.date, medicine_history_path(:mh_id => mhis.id) %></td>
+          <td> <%= link_to mhis.date, 
+          medicine_history_path(:mh_id => mhis.id, :id => @user.id) %></td>
           <td> <%= Medicine.find(mhis.medicine_id).name %> </td>
           <td> <%= mhis.dose %> <%= mhis.adm %> </td>
         </tr>
@@ -34,7 +34,6 @@
     </div>
   </div>
   <h3>副作用歴</h3>
-  <div>
   <table class="tbl-r03">
       <thead>
         <tr>
@@ -46,20 +45,32 @@
       <tbody>
     <% @sefe.each do |se| %>
         <tr>
-          <td> <%= link_to Medicine.find(se.medicine_id).name,
-            side_effect_path(:sefe_id => se.id) %></td>
+          <td> <%= link_to se.id, side_effect_path(:sefe_id => se.id) %></td>
           <td> <%= se.name %> </td>
           <td> <%= se.description %></td>
         </tr>
     <% end %>
       </tbody>
   </table>
-  <div class="center">
-    <%= paginate @mhis %>
-  </div>
-  </div>
+  
   <h4>
-    <%= link_to "お薬追加", medic_path %>
+    <!--  検索拡張機能  -->
+    <!--<%= link_to "お薬追加", medic_path(:id) %>-->
+    <h3>お薬検索</h3>
+    <%= form_tag(medicine_history_pharmacist_path,:method => 'get') do %>
+      <%= text_field_tag :search, params[:search]  %>
+      <%= submit_tag 'Search', :name => nil %>
+    <% end %>
+    <div>
+    <ul><% @medicines.each do |med| %>
+      <li>
+        <%= link_to med.name, new_medicine_history_path(:m_id => med.id, :u_id => @user.id ) %>
+        <%= med.effect %>
+      </li>
+      <% end %>
+    <%= paginate @medicines %>
+      </ul>
+    </div>
   </h4>
   <h4>
     <%= link_to "副作用歴追加", new_side_effect_path %>

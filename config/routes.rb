@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'user_pharmacists/show'
-
-  get 'session_pharmacists/new'
-
   root 'main_pages#home'
   
   get '/about',   to: 'main_pages#about'
@@ -12,7 +8,12 @@ Rails.application.routes.draw do
   get   '/signup',  to: 'users#new'
   post  '/signup',  to: 'users#create'
   get   '/edit',    to: 'users#edit'
-  resources :users
+  resources :users do
+    member do
+      get :followers
+    end
+  end
+  resources :relationships, only: [:create, :destroy]
   
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
@@ -26,8 +27,14 @@ Rails.application.routes.draw do
   get '/medic',  to: 'medicines#show' #特定の薬表示
   resources :medicines
   
-  get   '/mhis',      to: 'medicine_histories#index'
   resources :medicine_histories
+  resources :medicine_history_pharmacists
+  resources :user_pharmacists do
+    member do
+      get :following
+    end
+  end
+  resources :relationships, only: [:create, :destroy]
   
-  resources :user_pharmacists
+  resources :side_effects
 end

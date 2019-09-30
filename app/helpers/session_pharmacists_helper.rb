@@ -20,9 +20,15 @@ module SessionPharmacistsHelper
     !current_user_ph.nil?
   end
   
+  # 現在選択している患者を選ぶ
+  # def current_user
+  #   if logged_in_ph?
+  #     @current_user ||= User.find_by(id: params[:id])
+  #   end
+  # end
     
   # 現在のユーザーをログアウトする
-  def log_out_ph
+  def logout_ph
     session.delete(:user_ph_id)
     @current_user_ph = nil
   end

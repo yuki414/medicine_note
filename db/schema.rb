@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929033304) do
+ActiveRecord::Schema.define(version: 20190930012538) do
+
+  create_table "followings", force: :cascade do |t|
+    t.integer "user_id_id"
+    t.integer "user_pharmacist_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id_id"], name: "index_followings_on_user_id_id"
+    t.index ["user_pharmacist_id_id"], name: "index_followings_on_user_pharmacist_id_id"
+  end
 
   create_table "institutions", force: :cascade do |t|
     t.string "name"
@@ -63,6 +72,22 @@ ActiveRecord::Schema.define(version: 20190929033304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "side_effects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "medicine_id"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_pharmacists", force: :cascade do |t|

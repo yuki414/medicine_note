@@ -1,0 +1,25 @@
+<% provide(:title, '副作用歴の追加') %>
+<h1>副作用歴の追加</h1>
+
+<div class="col-md-6 col-md-offset-3">
+  <div class = "h3">
+    副作用は
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(@sefe) do |f| %>
+      
+      <%= f.label :medicine_id, "お薬名" %>
+      <%= f.collection_select :medicine_id, Medicine.all, :id, :name %>
+
+      <%= f.label :name, "症状" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :description, "詳細な説明" %>
+      <%= f.text_area :description, size: "20x5" %>
+
+      <%= f.submit "追加", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

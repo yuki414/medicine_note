@@ -1,9 +1,9 @@
 class MedicineHistoriesController < ApplicationController
   
-  before_action :require_login
+  # before_action :require_login
+  before_action :require_uop, only: [:show, :new, :create, :edit, :update]
   
   def index
-    # @medicine_histories = current_user.medicine_histories
   end
   
   def show
@@ -17,11 +17,17 @@ class MedicineHistoriesController < ApplicationController
   
   def create
     @mhis = MedicineHistory.new(mhis_params)
-    @mhis.user_id = current_user.id
+    # if current_user
+      @mhis.user_id = current_user.id
+    # elsif params[:id].present?
+      # @mhis.user_id = (params[:u_id])
+    # end
     if @mhis.save
       redirect_to user_path(current_user.id)
     else
-      redirect_to new_medicine_history_path
+      flash[:danger]="無効な入力です。"
+      m_id=mhis_params[:medicine_id]
+      redirect_to new_medicine_history_path(:m_id => m_id)
     end
   end
   
@@ -41,8 +47,12 @@ class MedicineHistoriesController < ApplicationController
 
   def destroy
     MedicineHistory.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to current_user
+    flash[:success] = "お薬の記録を削除しました"
+    if current_user
+      redirect_to current_user
+    elsif current_user_ph
+      redirect_to medicine_history_pharmacist_path
+    end
   end
   
   private

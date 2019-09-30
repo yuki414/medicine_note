@@ -1,10 +1,12 @@
 class MedicinesController < ApplicationController
   
-  before_action :require_login,  only: [:new,  :edit, :update]
-  
+  before_action :require_login,  only: [:new, :showt, :update]
+  PER=8
   def index
-    @medicines = Medicine.search(params[:search])
-    # @medicines = Medicine.paginate(page: params[:page], per_page: 5).search(params[:search])
+    # @medicines = Medicine.search(params[:search])
+    @medicines = Medicine.search(params[:search]).
+          page(params[:page]).per(PER)
+    @user = current_user
   end
   
   def show

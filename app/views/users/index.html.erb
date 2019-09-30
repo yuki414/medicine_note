@@ -1,0 +1,19 @@
+<% provide(:title, '患者さん検索') %>
+<aside class="col-md-8 col-md-offset-2">
+<h1>患者さん検索</h1>
+
+<!--  検索拡張機能  -->
+<h3>患者さん検索</h3>
+<%= form_tag(users_path,:method => 'get') do %>
+  <%= text_field_tag :search, params[:search]  %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+
+<ul><% @users.each do |user| %>
+  <li>
+    <%= link_to user.name, 
+    medicine_history_pharmacist_path(:id => user.id) %>
+  </li>
+  <% end %>
+</ul>
+</aside>

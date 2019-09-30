@@ -20,7 +20,7 @@ class SessionPharmacistsController < ApplicationController
   end
   
   def destroy
-    log_out_ph
+    logout_ph
     redirect_to root_url
   end
 end

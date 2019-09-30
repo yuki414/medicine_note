@@ -1,1 +1,10 @@
+<div class="col-md-8 col-md-offset-2">
 <h1><%= @user_ph.name %>さま</h1>
+
+  <div class="row">
+    <h4>最近受け持った患者さん</h4>
+    ~~ここに履歴~~
+    <h4><%= link_to "患者さん検索", users_path  %></h4>
+    <h4><%= link_to "おくすり検索", medicines_path  %></h4>
+  </div>
+</div>
